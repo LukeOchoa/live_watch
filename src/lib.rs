@@ -99,6 +99,7 @@ pub struct LiveWatch {
     watcher: notify::INotifyWatcher,
     word_wrap: bool,
     line_separation: LineSeparation,
+    selectable_text_mode: bool,
 }
 
 impl LiveWatch {
@@ -125,6 +126,7 @@ impl Default for LiveWatch {
         let font_size = egui::FontId::proportional(30.0);
         let word_wrap = true;
         let line_separation = LineSeparation::Off;
+        let selectable_text_mode = false;
 
         Self {
             filename,
@@ -133,6 +135,7 @@ impl Default for LiveWatch {
             font_size,
             word_wrap,
             line_separation,
+            selectable_text_mode,
         }
     }
 }
@@ -218,6 +221,9 @@ fn separation_button(ui: &mut egui::Ui, lw: &mut LiveWatch, option: LineSeparati
         .add(egui::RadioButton::new(lw.line_separation == option, text))
         .clicked()
     {
+        if lw.selectable_text_mode {
+            lw.selectable_text_mode = false;
+        }
         if lw.line_separation == option {
             lw.line_separation = LineSeparation::Off
         } else {
@@ -253,6 +259,18 @@ impl eframe::App for LiveWatch {
                     // Line Seperater Option ===========
                     separation_button(ui, self, LineSeparation::AlphaNumeric, "Separate Lines");
                     separation_button(ui, self, LineSeparation::All, "Separate All Lines");
+
+                    // Temp: Selectedable Text mode (LineSeparation will be turned off. I think it has to...? currently at this code patch of egui
+                    if ui
+                        .radio(self.selectable_text_mode, "Highlight/Copyable Mode")
+                        .clicked()
+                    {
+                        self.selectable_text_mode = !self.selectable_text_mode;
+
+                        if self.selectable_text_mode {
+                            self.line_separation = LineSeparation::Off;
+                        }
+                    }
                 });
             });
             ui.separator();
@@ -262,9 +280,13 @@ impl eframe::App for LiveWatch {
             egui::ScrollArea::both().show(ui, |ui| {
                 match self.line_separation {
                     LineSeparation::Off => {
-                        let rich_text = egui::RichText::new(self.risky_get_fstring())
-                            .font(self.font_size.clone());
-                        ui.add(egui::Label::new(rich_text).wrap(self.word_wrap));
+                        if !self.selectable_text_mode {
+                            let rich_text = egui::RichText::new(self.risky_get_fstring())
+                                .font(self.font_size.clone());
+                            ui.add(egui::Label::new(rich_text).wrap(self.word_wrap));
+                        } else {
+                            ui.add(egui::TextEdit::multiline(&mut self.risky_get_fstring()));
+                        }
                     }
                     _ => {
                         make_separate(self, ui);

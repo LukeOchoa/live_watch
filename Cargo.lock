@@ -669,19 +669,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "ecolor"
-version = "0.22.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2e479a7fa3f23d4e794f8b2f8b3568dd4e47886ad1b12c9c095e141cb591eb63"
-
-[[package]]
 name = "eframe"
 version = "0.21.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3df3ce60931e5f2d83bab4484d1a283908534d5308cc6b0c5c22c59cd15ee7cc"
 dependencies = [
  "bytemuck",
- "egui 0.21.0",
+ "egui",
  "egui-winit",
  "egui_glow",
  "glow",
@@ -706,20 +700,9 @@ checksum = "6412a21e0bde7c0918f7fb44bbbb86b5e1f88e63c026a4e747cc7af02f76dfbe"
 dependencies = [
  "accesskit",
  "ahash",
- "epaint 0.21.0",
+ "epaint",
  "nohash-hasher",
  "tracing",
-]
-
-[[package]]
-name = "egui"
-version = "0.22.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a3aef8ec3ae1b772f340170c65bf27d5b8c28f543a0116c844d2ac08d01123e7"
-dependencies = [
- "ahash",
- "epaint 0.22.0",
- "nohash-hasher",
 ]
 
 [[package]]
@@ -731,7 +714,7 @@ dependencies = [
  "accesskit_winit",
  "android-activity",
  "arboard",
- "egui 0.21.0",
+ "egui",
  "instant",
  "smithay-clipboard",
  "tracing",
@@ -740,36 +723,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "egui_demo_lib"
-version = "0.22.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "807f2eaee012c4f10d541db010845340fcdebf0b97b82b88a13e5ca1d6c84385"
-dependencies = [
- "egui 0.22.0",
- "egui_extras 0.22.0",
- "enum-map",
- "log",
- "unicode_names2",
-]
-
-[[package]]
 name = "egui_extras"
 version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f051342e97dfa2445107cb7d2e720617f5c840199b5cb4fe0ffcf481fcf5cce"
 dependencies = [
- "egui 0.21.0",
+ "egui",
  "image",
- "serde",
-]
-
-[[package]]
-name = "egui_extras"
-version = "0.22.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9278f4337b526f0d57e5375e5a7340a311fa6ee8f9fcc75721ac50af13face02"
-dependencies = [
- "egui 0.22.0",
  "serde",
 ]
 
@@ -780,7 +740,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8257332fb168a965b3dca81d6a344e053153773c889cabdba0b3b76f1629ae81"
 dependencies = [
  "bytemuck",
- "egui 0.21.0",
+ "egui",
  "glow",
  "memoffset 0.6.5",
  "tracing",
@@ -795,33 +755,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b8ecd80612937e0267909d5351770fe150004e24dab93954f69ca62eecd3f77e"
 dependencies = [
  "bytemuck",
-]
-
-[[package]]
-name = "emath"
-version = "0.22.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3857d743a6e0741cdd60b622a74c7a36ea75f5f8f11b793b41d905d2c9721a4b"
-
-[[package]]
-name = "enum-map"
-version = "2.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9705d8de4776df900a4a0b2384f8b0ab42f775e93b083b42f8ce71bdc32a47e3"
-dependencies = [
- "enum-map-derive",
- "serde",
-]
-
-[[package]]
-name = "enum-map-derive"
-version = "0.13.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ccb14d927583dd5c2eac0f2cf264fc4762aefe1ae14c47a8a20fc1939d3a5fc0"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.29",
 ]
 
 [[package]]
@@ -855,23 +788,8 @@ dependencies = [
  "ahash",
  "atomic_refcell",
  "bytemuck",
- "ecolor 0.21.0",
- "emath 0.21.0",
- "nohash-hasher",
- "parking_lot",
-]
-
-[[package]]
-name = "epaint"
-version = "0.22.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09333964d4d57f40a85338ba3ca5ed4716070ab184dcfed966b35491c5c64f3b"
-dependencies = [
- "ab_glyph",
- "ahash",
- "atomic_refcell",
- "ecolor 0.22.0",
- "emath 0.22.0",
+ "ecolor",
+ "emath",
  "nohash-hasher",
  "parking_lot",
 ]
@@ -1389,9 +1307,8 @@ name = "live_watch"
 version = "0.1.0"
 dependencies = [
  "eframe",
- "egui 0.21.0",
- "egui_demo_lib",
- "egui_extras 0.21.0",
+ "egui",
+ "egui_extras",
  "notify",
  "walkdir",
 ]
@@ -2348,12 +2265,6 @@ checksum = "5c5713f0fc4b5db668a2ac63cdb7bb4469d8c9fed047b1d0292cc7b0ce2ba921"
 dependencies = [
  "tinyvec",
 ]
-
-[[package]]
-name = "unicode_names2"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "446c96c6dd42604779487f0a981060717156648c1706aa1f464677f03c6cc059"
 
 [[package]]
 name = "url"

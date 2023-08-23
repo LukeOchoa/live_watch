@@ -166,7 +166,11 @@ fn file_watcher(filename: String) -> (notify::INotifyWatcher, Arc<Mutex<String>>
 fn has_alphanumeric(buffer: &Vec<char>) -> bool {
     let mut booly = false;
     for chr in buffer {
-        if chr.is_ascii_alphanumeric() {
+        // if chr.is_ascii_alphanumeric() {
+        // booly = true;
+        // break;
+        // }
+        if *chr != ' ' || *chr != '\n' {
             booly = true;
             break;
         }
